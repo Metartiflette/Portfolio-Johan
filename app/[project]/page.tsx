@@ -180,25 +180,6 @@ export default async function ProjectPage({ params }: Props) {
           </section>
         )}
       </div>
-
-      {/* Footer */}
-      <footer className="bg-black border-t border-gray-800 px-8 md:px-16 py-8 text-center text-sm text-gray-400">
-        <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-4">
-          <Link href="/privacy" className="hover:text-white transition-colors">
-            Privacy Notice
-          </Link>
-          <Link href="/contact" className="hover:text-white transition-colors">
-            Contact Me
-          </Link>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="hover:text-white transition-colors"
-          >
-            Go back to the top
-          </button>
-        </div>
-        <p>© {new Date().getFullYear()} JOHAN VUILLERME</p>
-      </footer>
     </main>
   );
 }
