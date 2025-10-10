@@ -26,7 +26,7 @@ export default function Footer() {
             <p className="font-extralight text-[16px]">Johan Vuillerme</p>
           </Link>
 
-          <div className="flex flex-col gap-6 justify-center text-2xl">
+          <div className="flex flex-col gap-6 justify-center text-lg">
             <Link
               href="/privacy"
               className="hover:opacity-80 transition-opacity text-center"
