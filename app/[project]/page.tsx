@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { getSingleProject } from "@/lib/sanity.query";
 import type { ProjectType } from "@/types";
 import { PortableText } from "@portabletext/react";
-import { HiMenu, HiArrowLeft } from "react-icons/hi";
+import { Menu, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: Props) {
           V
         </Link>
         <button className="text-2xl">
-          <HiMenu />
+          <Menu />
         </button>
       </header>
 
@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: Props) {
           href="/"
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group"
         >
-          <HiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft className="group-hover:-translate-x-1 transition-transform" />
           Back to home
         </Link>
 

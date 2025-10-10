@@ -4,24 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { getHome } from "@/lib/sanity.query";
 import { HomeType } from "@/types";
-import { HiMenu } from "react-icons/hi";
-import { FaInstagram, FaLinkedin, FaGlobe } from "react-icons/fa";
 
 export default async function Home() {
   const home: HomeType = await getHome();
 
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-8 py-6 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold">
-          {home.heroTitle.charAt(0)}
-        </Link>
-        <button className="text-2xl">
-          <HiMenu />
-        </button>
-      </header>
-
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center">
         {home.featuredProjects[0]?.coverImage && (
