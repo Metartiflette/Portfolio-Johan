@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import Logo from "@/public/icons/JVlogo_Blanc.png";
+import Logo from "@/public/icons/logo_blanc.png";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);

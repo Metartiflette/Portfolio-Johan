@@ -1,22 +1,94 @@
 // app/components/global/Footer.tsx
 
-export default function Footer() {
-  return (
-    <footer className="border-t border-zinc-800 mt-32">
-      <div className="max-w-7xl mx-auto flex lg:flex-row flex-col items-center lg:justify-between justify-center gap-y-4 md:px-16 px-6 py-16 text-zinc-400">
-        <small className=" duration-200 font-mono">
-          All rights reserved &copy; {new Date().getFullYear()}
-        </small>
+"use client";
 
-        <small className="hover:text-white duration-200">
-          <a
-            href="https://github.com/B0TAstro/e-portfolio-app/"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Made by <span className="text-green-400">Tom Boullay</span>
-          </a>
-        </small>
+import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/public/icons/logo_blanc.png";
+
+export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <footer className="bg-black">
+      <div className="mx-auto pb-[14px] pt-[100px] md:pt-[140px] md:pb-[140px]">
+        <div className="hidden md:grid grid-cols-3 items-center justify-between">
+          <Link href="/" className="flex flex-col items-center">
+            <Image
+              src={Logo}
+              width={80}
+              height={80}
+              alt="Logo"
+              className="hover:opacity-80 transition-opacity"
+            />
+            <p className="font-extralight text-[16px]">Johan Vuillerme</p>
+          </Link>
+
+          <div className="flex flex-col gap-6 justify-center text-2xl">
+            <Link
+              href="/privacy"
+              className="hover:opacity-80 transition-opacity text-center"
+            >
+              Privacy Notice
+            </Link>
+            <Link
+              href="https://fr.linkedin.com/in/johan-vuillerme"
+              className="hover:opacity-80 transition-opacity text-center"
+            >
+              Contact Me
+            </Link>
+            <button
+              onClick={scrollToTop}
+              className="hover:opacity-80 transition-opacity text-center underline"
+            >
+              Go back to the top
+            </button>
+          </div>
+
+          <p className="font-light text-[10px] text-center">
+            © Johan Vuillerme {new Date().getFullYear()}
+          </p>
+        </div>
+
+        <div className="md:hidden flex flex-col gap-20 items-center">
+          <Link href="/" className="flex flex-col items-center">
+            <Image
+              src={Logo}
+              width={80}
+              height={80}
+              alt="Logo"
+              className="hover:opacity-80 transition-opacity"
+            />
+            <p className="font-extralight text-[16px]">Johan Vuillerme</p>
+          </Link>
+
+          <div className="flex flex-col gap-6 items-center text-[16px]">
+            <Link
+              href="/privacy"
+              className="hover:opacity-80 transition-opacity text-center"
+            >
+              Privacy Notice
+            </Link>
+            <Link
+              href="https://fr.linkedin.com/in/johan-vuillerme"
+              className="hover:opacity-80 transition-opacity text-center"
+            >
+              Contact Me
+            </Link>
+            <button
+              onClick={scrollToTop}
+              className="hover:opacity-80 transition-opacity text-center underline"
+            >
+              Go back to the top
+            </button>
+          </div>
+
+          <p className="font-light text-[10px] text-center">
+            © Johan Vuillerme {new Date().getFullYear()}
+          </p>
+        </div>
       </div>
     </footer>
   );
