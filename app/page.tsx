@@ -19,13 +19,13 @@ export default async function Home() {
           alt="Linktree"
           width={44}
           height={44}
-          className="object-contain"
+          className="object-contain w-5 h-5 md:w-11 md:h-11"
         />
       ),
-      instagram: <Instagram size={44} />,
-      linkedin: <Linkedin size={44} />,
-      twitter: <Twitter size={44} />,
-      facebook: <Facebook size={44} />,
+      instagram: <Instagram className="w-5 h-5 md:w-11 md:h-11" />,
+      linkedin: <Linkedin className="w-5 h-5 md:w-11 md:h-11" />,
+      twitter: <Twitter className="w-5 h-5 md:w-11 md:h-11" />,
+      facebook: <Facebook className="w-5 h-5 md:w-11 md:h-11" />,
     };
     return icons[platform] || null;
   };
@@ -81,34 +81,25 @@ export default async function Home() {
         ))}
       </section>
 
-      <section className="relative h-[70vh] flex flex-col items-center justify-center text-center overflow-hidden">
+      <section className="relative pt-20 pb-20 md:pt-80 md:pb-80 flex flex-col items-center justify-center text-center overflow-hidden">
         <Image
           src={home.ctaBackgroundImage}
           alt="CTA background"
           fill
           className="object-cover absolute inset-0 z-0"
         />
-        <div className="absolute inset-0 bg-black/70 z-0" />
-        <div className="relative z-10 space-y-6">
-          <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-wide">
+        <div className="relative z-10">
+          <h2 className="text-2xl md:text-6xl font-black uppercase">
             {home.ctaTitle}
           </h2>
-          {home.ctaButton?.url && (
-            <Link
-              href={home.ctaButton.url}
-              className="inline-block bg-white text-black px-8 py-3 rounded-full uppercase text-sm tracking-wide font-semibold hover:bg-gray-200 transition"
-            >
-              {home.ctaButton.label}
-            </Link>
-          )}
-          <div className="flex justify-center gap-6 mt-8">
+          <div className="flex justify-center gap-5 mt-3 md:mt-11">
             {home.socialLinks?.length > 0 && home.socialLinks.map((link, i) => (
               <Link
                 key={i}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-gray-300 transition"
+                className="hover:opacity-80 transition-opacity"
               >
                 {renderIcon(link.platform)}
               </Link>
