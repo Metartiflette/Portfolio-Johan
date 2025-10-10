@@ -10,9 +10,8 @@ export async function getHome() {
       title,
       heroTitle,
       heroTagline,
-      ctaTitle,
-      socialLinks,
-      "featuredProjects": featuredProjects[]-> {
+      "heroImage": heroImage.asset->url,
+      featuredProjects[]->{
         _id,
         title,
         "slug": slug.current,
@@ -21,9 +20,12 @@ export async function getHome() {
         coverImage {
           alt,
           "image": asset->url
-        },
-        order
-      }
+        }
+      },
+      ctaTitle,
+      "ctaBackgroundImage": ctaBackgroundImage.asset->url,
+      ctaButton,
+      socialLinks[]{ platform, url }
     }`
   );
 }

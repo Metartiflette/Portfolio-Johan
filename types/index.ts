@@ -2,6 +2,20 @@
 
 import { PortableTextBlock } from "@portabletext/react";
 
+
+export type HomeType = {
+  _id: string;
+  title: string;
+  heroTitle: string;
+  heroTagline?: string;
+  heroImage: string;
+  featuredProjects: ProjectType[];
+  ctaTitle: string;
+  ctaBackgroundImage: string;
+  ctaButton?: { label: string; url: string };
+  socialLinks: { platform: string; url: string }[];
+};
+
 export type ProjectType = {
   _id: string;
   title: string;
@@ -30,18 +44,4 @@ export type ProjectType = {
     caption?: string;
   }[];
   order?: number;
-};
-
-export type HomeType = {
-  _id: string;
-  title: string;
-  heroTitle: string;
-  heroTagline?: string;
-  featuredProjects: ProjectType[];
-  ctaTitle?: string;
-  socialLinks?: {
-    instagram?: string;
-    linkedin?: string;
-    other?: string;
-  };
 };
