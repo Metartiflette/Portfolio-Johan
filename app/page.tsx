@@ -1,37 +1,44 @@
 // app/page.tsx
+// 
+import { ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getHome } from "@/lib/sanity.query";
 import { HomeType } from "@/types";
+import LinktreeLogo from "@/public/icons/linktree-logo.png";
 import { Instagram, Linkedin, Twitter, Facebook } from "lucide-react";
-import { ReactElement } from "react";
 
 export default async function Home() {
   const home: HomeType = await getHome();
-  
+
   const renderIcon = (platform: string) => {
     const icons: Record<string, ReactElement> = {
-      instagram: <Instagram size={22} />,
-      linkedin: <Linkedin size={22} />,
-      twitter: <Twitter size={22} />,
-      facebook: <Facebook size={22} />,
+      linktree: (
+        <Image
+          src={LinktreeLogo}
+          alt="Linktree"
+          width={44}
+          height={44}
+          className="object-contain"
+        />
+      ),
+      instagram: <Instagram size={44} />,
+      linkedin: <Linkedin size={44} />,
+      twitter: <Twitter size={44} />,
+      facebook: <Facebook size={44} />,
     };
     return icons[platform] || null;
   };
 
   return (
     <main className="relative min-h-screen text-white">
-      {/* Hero Section */}
       <section className="absolute inset-0 z-10 h-screen flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl md:text-6xl font-black uppercase mb-2">
-            {home.heroTitle}
-          </h1>
-          {home.heroTagline && (
-            <p className="text-lg md:text-2xl">{home.heroTagline}</p>
-          )}
+        <h1 className="text-4xl md:text-6xl font-black uppercase mb-2">
+          {home.heroTitle}
+        </h1>
+        <p className="text-lg md:text-2xl">{home.heroTagline}</p>
       </section>
 
-      {/* Projects Grid */}
       <section className="grid md:grid-cols-3">
         {home.featuredProjects.map((project) => (
           <Link
@@ -40,14 +47,25 @@ export default async function Home() {
             className="group relative block overflow-hidden"
           >
             <div className="relative h-[400px] md:h-[500px] overflow-hidden">
-              {project.coverImage?.image && (
+              {project.coverMedia?.type === "video" && project.coverMedia.video?.url ? (
+                <video
+                  src={project.coverMedia.video.url}
+                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+              ) : project.coverMedia?.image?.url ? (
                 <Image
-                  src={project.coverImage.image}
-                  alt={project.coverImage.alt || project.title}
+                  src={project.coverMedia.image.url}
+                  alt={project.coverMedia.image.alt || project.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
-              )}
+              ) : null}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 p-6 z-10">
@@ -63,7 +81,6 @@ export default async function Home() {
         ))}
       </section>
 
-      {/* CTA Section */}
       <section className="relative h-[70vh] flex flex-col items-center justify-center text-center overflow-hidden">
         <Image
           src={home.ctaBackgroundImage}
@@ -85,7 +102,7 @@ export default async function Home() {
             </Link>
           )}
           <div className="flex justify-center gap-6 mt-8">
-            {home.socialLinks.map((link, i) => (
+            {home.socialLinks?.length > 0 && home.socialLinks.map((link, i) => (
               <Link
                 key={i}
                 href={link.url}

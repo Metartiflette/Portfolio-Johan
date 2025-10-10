@@ -10,22 +10,38 @@ export async function getHome() {
       title,
       heroTitle,
       heroTagline,
-      "heroImage": heroImage.asset->url,
+      ctaTitle,
+      "ctaBackgroundImage": ctaBackgroundImage.asset->url,
+      ctaButton {
+        label,
+        url
+      },
       featuredProjects[]->{
         _id,
         title,
         "slug": slug.current,
         category,
         tagline,
-        coverImage {
-          alt,
-          "image": asset->url
-        }
+        coverMedia {
+          type,
+          image {
+            alt,
+            "url": asset->url
+          },
+          video {
+            "url": asset->url
+          }
+        },
+        order
       },
-      ctaTitle,
-      "ctaBackgroundImage": ctaBackgroundImage.asset->url,
-      ctaButton,
-      socialLinks[]{ platform, url }
+      socialLinks[] {
+        platform,
+        url,
+        customIcon {
+          "url": asset->url,
+          alt
+        }
+      }
     }`
   );
 }
@@ -38,9 +54,15 @@ export async function getProjects() {
       "slug": slug.current,
       category,
       tagline,
-      coverImage {
-        alt,
-        "image": asset->url
+      coverMedia {
+        type,
+        image {
+          alt,
+          "url": asset->url
+        },
+        video {
+          "url": asset->url
+        }
       },
       order
     }`
@@ -56,9 +78,15 @@ export async function getSingleProject(slug: string) {
       category,
       tagline,
       description,
-      coverImage {
-        alt,
-        "image": asset->url
+      coverMedia {
+        type,
+        image {
+          alt,
+          "url": asset->url
+        },
+        video {
+          "url": asset->url
+        }
       },
       credits[] {
         role,
