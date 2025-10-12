@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getHome } from "@/lib/sanity.query";
 import { HomeType } from "@/types";
+import ProjectCard from "@/app/components/ProjectCard";
 import LinktreeLogo from "@/public/icons/linktree-logo.png";
 import { Instagram, Linkedin, Twitter, Facebook } from "lucide-react";
 
@@ -39,45 +40,9 @@ export default async function Home() {
         <p className="text-lg md:text-2xl">{home.heroTagline}</p>
       </section>
 
-      <section className="grid md:grid-cols-3">
-        {home.featuredProjects.map((project) => (
-          <Link
-            key={project._id}
-            href={`/${project.slug}`}
-            className="group relative block overflow-hidden"
-          >
-            <div className="relative h-[400px] md:h-[500px] overflow-hidden">
-              {project.coverMedia?.type === "video" && project.coverMedia.video?.url ? (
-                <video
-                  src={project.coverMedia.video.url}
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                  muted
-                  autoPlay
-                  loop
-                  playsInline
-                  preload="metadata"
-                />
-              ) : project.coverMedia?.image?.url ? (
-                <Image
-                  src={project.coverMedia.image.url}
-                  alt={project.coverMedia.image.alt || project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              ) : null}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-            </div>
-            <div className="absolute bottom-0 left-0 p-6 z-10">
-              <h2 className="text-3xl font-bold uppercase mb-1">{project.title}</h2>
-              {project.category && (
-                <p className="text-sm text-gray-300">{project.category}</p>
-              )}
-              {project.tagline && (
-                <p className="text-sm text-gray-400 mt-1">{project.tagline}</p>
-              )}
-            </div>
-          </Link>
+      <section className="grid grid-cols-1 md:grid-cols-2">
+        {home.featuredProjects.map((project, index) => (
+          <ProjectCard key={project._id} project={project} index={index} />
         ))}
       </section>
 
