@@ -55,13 +55,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         ) : null}
       </div>
 
-      <div className="absolute bottom-0 left-0 p-6 z-10">
-        <h2 className="text-3xl md:text-4xl font-bold uppercase mb-1">{project.title}</h2>
+      <div className="absolute bottom-0 left-0 p-8 z-10">
+        <h2 className="text-2xl md:text-4xl font-black uppercase">{project.title}</h2>
         {project.category && (
-          <p className="text-sm text-gray-300">{project.category}</p>
+          <p className="text-[16px] md:text-[28px] font-bold">{project.category}</p>
         )}
         {project.tagline && (
-          <p className="text-sm text-gray-400 mt-1">{project.tagline}</p>
+          <p className="text-[12px] md:text-2xl">{project.tagline}</p>
         )}
       </div>
     </Link>
