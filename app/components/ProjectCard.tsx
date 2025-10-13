@@ -1,3 +1,5 @@
+// app/components/ProjectCard.tsx
+
 "use client";
 
 import Image from "next/image";
@@ -35,7 +37,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         {project.coverMedia?.type === "video" && project.coverMedia.video?.url ? (
           <video
             src={project.coverMedia.video.url}
-            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+            className="object-cover w-full h-full transition-transform duration-350 group-hover:scale-101"
             muted
             autoPlay
             loop
@@ -47,7 +49,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             src={project.coverMedia.image.url}
             alt={project.coverMedia.image.alt || project.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-350 group-hover:scale-101"
             loading="lazy"
           />
         ) : null}
