@@ -52,9 +52,15 @@ export type ProjectType = {
     };
   }[];
   gallery?: {
-    image: string;
-    alt?: string | null;
-    caption?: string;
+    type: "image" | "video";
+    image?: {
+      url?: string;
+      alt?: string | null;
+      caption?: string;
+    };
+    video?: {
+      url?: string;
+      caption?: string;
+    };
   }[];
-  order?: number;
 };

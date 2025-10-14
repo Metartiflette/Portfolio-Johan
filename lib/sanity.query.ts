@@ -1,5 +1,3 @@
-// lib/sanity.query.ts
-
 import { groq } from "next-sanity";
 import client from "./sanity.client";
 
@@ -31,8 +29,7 @@ export async function getHome() {
           video {
             "url": asset->url
           }
-        },
-        order
+        }
       },
       socialLinks[] {
         platform,
@@ -48,7 +45,7 @@ export async function getHome() {
 
 export async function getProjects() {
   return client.fetch(
-    groq`*[_type == "project"] | order(order asc, _createdAt desc){
+    groq`*[_type == "project"] | order(_createdAt desc){
       _id,
       title,
       "slug": slug.current,
@@ -63,8 +60,7 @@ export async function getProjects() {
         video {
           "url": asset->url
         }
-      },
-      order
+      }
     }`
   );
 }
@@ -88,21 +84,17 @@ export async function getSingleProject(slug: string) {
           "url": asset->url
         }
       },
-      credits[] {
-        role,
-        name
-      },
-      tools[] {
-        name,
-        icon {
-          "image": asset->url,
-          alt
-        }
-      },
       gallery[] {
-        "image": asset->url,
-        alt,
-        caption
+        type,
+        image {
+          "url": asset->url,
+          alt,
+          caption
+        },
+        video {
+          "url": asset->url,
+          caption
+        }
       }
     }`,
     { slug }
