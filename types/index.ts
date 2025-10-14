@@ -65,38 +65,31 @@ export type ProjectType = {
   }[];
 };
 
-export type ProfileImageType = {
+export type AboutSectionImageType = {
   url: string;
-  alt: string;
+  alt?: string | null;
 };
 
-export type ClientType = {
-  url: string;
-  alt: string;
-  clientName: string;
-};
-
-export type ClientsSectionType = {
-  title: string;
-  clients: ClientType[];
-};
-
-export type SectionImageType = {
-  url: string;
-  alt: string;
-};
-
-export type AdditionalSectionType = {
+export type AboutAdditionalSectionType = {
   title?: string;
-  images?: SectionImageType[];
+  images?: AboutSectionImageType[];
   content?: PortableTextBlock[];
 };
 
 export type AboutType = {
   _id: string;
   title: string;
-  profileImages: ProfileImageType[];
+  profileImages: {
+    url: string;
+    alt?: string | null;
+  }[];
   description: PortableTextBlock[];
-  clientsSection: ClientsSectionType;
-  sections: AdditionalSectionType[];
+  clientsSection: {
+    title: string;
+    clients: {
+      url: string;
+      alt?: string | null;
+    }[];
+  };
+  sections?: AboutAdditionalSectionType[];
 };
