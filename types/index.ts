@@ -64,3 +64,39 @@ export type ProjectType = {
     };
   }[];
 };
+
+export type ProfileImageType = {
+  url: string;
+  alt: string;
+};
+
+export type ClientType = {
+  url: string;
+  alt: string;
+  clientName: string;
+};
+
+export type ClientsSectionType = {
+  title: string;
+  clients: ClientType[];
+};
+
+export type SectionImageType = {
+  url: string;
+  alt: string;
+};
+
+export type AdditionalSectionType = {
+  title?: string;
+  images?: SectionImageType[];
+  content?: PortableTextBlock[];
+};
+
+export type AboutType = {
+  _id: string;
+  title: string;
+  profileImages: ProfileImageType[];
+  description: PortableTextBlock[];
+  clientsSection: ClientsSectionType;
+  sections: AdditionalSectionType[];
+};

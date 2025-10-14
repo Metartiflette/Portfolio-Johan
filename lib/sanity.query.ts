@@ -100,3 +100,33 @@ export async function getSingleProject(slug: string) {
     { slug }
   );
 }
+
+export async function getAbout() {
+  return client.fetch(
+    groq`*[_type == "about"][0]{
+      _id,
+      title,
+      profileImages[] {
+        "url": image.asset->url,
+        alt,
+      },
+      description,
+      clientsSection {
+        title,
+        clients[] {
+          "url": logo.asset->url,
+          alt,
+          clientName,
+        },
+      },
+      sections[] {
+        title,
+        images[] {
+          "url": image.asset->url,
+          alt,
+        },
+        content,
+      },
+    }`
+  );
+}
