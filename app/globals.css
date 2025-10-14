@@ -5,9 +5,15 @@
 } */
 
 /* Sanity Style */
+.prose {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 .prose p {
   margin-bottom: 10px;
 }
+
 .prose p:last-child {
   margin-bottom: 0;
 }

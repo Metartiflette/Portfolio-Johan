@@ -32,7 +32,7 @@ export default async function Home() {
   };
 
   return (
-    <main className="relative min-h-screen text-white">
+    <main className="relative min-h-screen">
       <section className="absolute inset-0 z-10 h-screen flex flex-col items-center justify-center text-center pointer-events-none">
         <h1 className="text-4xl md:text-6xl font-black uppercase mb-2">
           {home.heroTitle}

@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { getSingleProject } from "@/lib/sanity.query";
 import type { ProjectType } from "@/types";
 import { PortableText } from "@portabletext/react";
+import VideoWithHoverControls from "@/app/components/VideoWithHoverControls";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
@@ -51,27 +52,20 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 md:px-12 py-8">
-      {/* Back */}
+    <main className="relative min-h-screen px-6 md:px-12 ">
       <Link
         href="/"
-        className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group"
+        className="group mt-38 mb-4 md:mt-46 md:mb-8 inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors "
       >
         <ArrowLeft className="group-hover:-translate-x-1 transition-transform" />
         Back to home
       </Link>
 
-      {/* Cover Media */}
-      <div className="relative w-full h-[400px] md:h-[600px] mb-12 rounded-lg overflow-hidden">
+      <div className="relative w-full h-[200px] md:h-[600px] overflow-hidden">
         {project.coverMedia?.type === "video" && project.coverMedia.video?.url ? (
-          <video
+          <VideoWithHoverControls
             src={project.coverMedia.video.url}
             className="object-cover w-full h-full"
-            muted
-            autoPlay
-            loop
-            playsInline
-            preload="metadata"
           />
         ) : (
           <Image
@@ -84,19 +78,16 @@ export default async function ProjectPage({ params }: Props) {
         )}
       </div>
 
-      {/* Header */}
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 uppercase">{project.title}</h1>
-        {project.category && <p className="text-lg text-gray-400 mb-2">{project.category}</p>}
-        {project.tagline && <p className="text-xl text-gray-300">{project.tagline}</p>}
+      <div className="text-center md:text-left mt-4 mb-6 md:mt-8 md:mb-12">
+        <h1 className="text-2xl md:text-5xl font-black uppercase">{project.title}</h1>
+        {project.category && <p className="text-[16px] md:text-2xl font-bold">{project.category}</p>}
       </div>
 
-      {/* Description */}
       {project.description && (
-        <section className="mb-16">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-2xl">→</span>
-            <h2 className="text-2xl font-bold">A few words about the project.</h2>
+        <section className="mb-6 md:mb-12">
+          <div className="flex items-center gap-2">
+            <span className="text-[16px] md:text-2xl">→</span>
+            <h2 className="text-[16px] md:text-2xl font-bold">A few words about the project.</h2>
           </div>
           <div className="prose prose-invert prose-lg max-w-none">
             <PortableText value={project.description} />
@@ -104,38 +95,34 @@ export default async function ProjectPage({ params }: Props) {
         </section>
       )}
 
-      {/* Gallery */}
       {project.gallery && project.gallery.length > 0 && (
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-6">Visual vignettes</h2>
-          <div className="space-y-6">
+        <section className="text-center md:text-left">
+          <h2 className="text-[16px] md:text-2xl font-bold mb-3 md:mb-6">Visual vignettes</h2>
+
+            <div className="space-y-6 md:space-y-12">
             {project.gallery.map((item, index) => (
               <div
                 key={index}
-                className="relative h-[400px] md:h-[600px] rounded-lg overflow-hidden"
+                className="group relative h-[200px] md:h-[600px] overflow-hidden"
               >
                 {item.type === "video" && item.video?.url ? (
-                  <video
+                  <VideoWithHoverControls
                     src={item.video.url}
-                    className="object-cover w-full h-full"
-                    muted
-                    autoPlay
-                    loop
-                    playsInline
-                    preload="metadata"
+                    className="object-cover w-full h-full transition-transform duration-350 group-hover:scale-101"
                   />
                 ) : item.image?.url ? (
                   <Image
                     src={item.image.url}
-                    alt={item.image.alt || `Gallery item ${index + 1}`}
+                    alt={item.image.alt || `Image Gallery`}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-350 group-hover:scale-101"
+                    loading="lazy"
                   />
                 ) : null}
 
                 {(item.image?.caption || item.video?.caption) && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                    <p className="text-sm text-gray-300">
+                  <div className="absolute z-1 pointer-events-none inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-250 ease-out">
+                    <p className="text-sm p-8 pb-16">
                       {item.image?.caption || item.video?.caption}
                     </p>
                   </div>
