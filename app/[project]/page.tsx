@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <main className="relative min-h-screen px-6 md:px-12 ">
+    <main className="relative min-h-screen px-6 md:px-12">
       <Link
         href="/"
         className="group mt-38 mb-4 md:mt-46 md:mb-8 inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors "
