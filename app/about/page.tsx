@@ -54,7 +54,7 @@ export default async function About() {
             </section>
 
 
-            {/* {about.sections?.map((section, index) => (
+            {about.sections?.map((section, index) => (
                 <section
                     key={index}
                     className="flex flex-col space-y-6 mt-12 md:mt-24"
@@ -98,7 +98,7 @@ export default async function About() {
                         </div>
                     )}
                 </section>
-            ))} */}
+            ))}
         </main>
     );
 }

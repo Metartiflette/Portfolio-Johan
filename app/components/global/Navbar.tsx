@@ -62,7 +62,7 @@ export default function Navbar() {
                 </div>
 
                 <nav
-                    className={`fixed top-0 right-0 h-screen w-full bg-black z-35 transform transition-transform duration-350 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"} flex items-center justify-center`}
+                    className={`fixed top-0 right-0 h-screen w-full bg-black opacity-95 z-35 transform transition-transform duration-350 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"} flex items-center justify-center`}
                 >
                     <div className="flex flex-col gap-8 text-center">
                         {navLinks.map((link) => (

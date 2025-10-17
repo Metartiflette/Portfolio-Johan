@@ -15,7 +15,7 @@ export default function IntroWrapper({ intro }: { intro: IntroType }) {
 
         if (!visible) {
             const expiration = new Date();
-            expiration.setHours(expiration.getHours() + 24);
+            expiration.setHours(expiration.getHours() + 2);
             document.cookie = `introSeen=true; path=/; expires=${expiration.toUTCString()}; SameSite=Lax`;
         }
     }, [visible]);
