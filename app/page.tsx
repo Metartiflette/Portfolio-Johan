@@ -3,6 +3,7 @@
 import { ReactElement, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { getHome, getIntro } from "@/lib/sanity.query";
 import { HomeType, IntroType } from "@/types";
 import ProjectCard from "@/app/components/ProjectCard";
@@ -16,11 +17,16 @@ export default async function HomePage() {
     getIntro(),
   ]);
 
+  const cookieStore = await cookies();
+  const introSeen = cookieStore.get("introSeen");
+
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <Suspense fallback={null}>
-        <IntroWrapper intro={intro} />
-      </Suspense>
+      {!introSeen && (
+        <Suspense fallback={null}>
+          <IntroWrapper intro={intro} />
+        </Suspense>
+      )}
 
       <section className="absolute inset-0 z-10 h-screen flex flex-col items-center justify-center text-center pointer-events-none">
         <h1 className="text-4xl md:text-6xl font-black uppercase mb-2">

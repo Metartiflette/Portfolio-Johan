@@ -12,6 +12,12 @@ export default function IntroWrapper({ intro }: { intro: IntroType }) {
     useEffect(() => {
         if (visible) document.body.style.overflow = "hidden";
         else document.body.style.overflow = "";
+
+        if (!visible) {
+            const expiration = new Date();
+            expiration.setHours(expiration.getHours() + 24);
+            document.cookie = `introSeen=true; path=/; expires=${expiration.toUTCString()}; SameSite=Lax`;
+        }
     }, [visible]);
 
     return visible ? (
