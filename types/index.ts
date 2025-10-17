@@ -93,3 +93,24 @@ export type AboutType = {
   };
   sections?: AboutAdditionalSectionType[];
 };
+
+export type IntroType = {
+  _id: string;
+  title: string;
+  logo: {
+    url: string;
+    alt?: string | null;
+  };
+  description: PortableTextBlock[];
+  backgroundMedia: {
+    type: "image" | "video";
+    image?: {
+      alt?: string | null;
+      url?: string;
+    };
+    video?: {
+      url?: string;
+    };
+  };
+  socialLinks?: SocialLinkType[];
+};

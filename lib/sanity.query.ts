@@ -130,3 +130,35 @@ export async function getAbout() {
     }`
   );
 }
+
+export async function getIntro() {
+  return client.fetch(
+    groq`*[_type == "intro"][0]{
+      _id,
+      title,
+      logo {
+        "url": asset->url,
+        alt
+      },
+      description,
+      backgroundMedia {
+        type,
+        image {
+          alt,
+          "url": asset->url
+        },
+        video {
+          "url": asset->url
+        }
+      },
+      socialLinks[] {
+        platform,
+        url,
+        customIcon {
+          "url": asset->url,
+          alt
+        }
+      }
+    }`
+  );
+}
