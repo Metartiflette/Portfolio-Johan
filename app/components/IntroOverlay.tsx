@@ -1,20 +1,25 @@
-// app/intro/page.tsx
+// app/components/IntroOverlay.tsx
 
-import { ReactElement } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
-import { getIntro } from "@/lib/sanity.query";
 import { IntroType } from "@/types";
-import IntroClient from "../components/IntroClient";
 import LinktreeLogo from "@/public/icons/linktree-logo.png";
 import { Instagram, Linkedin, Twitter, Facebook } from "lucide-react";
 
-export default async function Intro() {
-    const intro: IntroType = await getIntro();
+type IntroOverlayProps = {
+    intro: IntroType;
+    onFinish: () => void;
+};
 
-    const renderIcon = (platform: string): ReactElement | null => {
-        const icons: Record<string, ReactElement> = {
+export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
+    const [state, setState] = useState<"visible" | "fade-out">("visible");
+
+    const renderIcon = (platform: string) => {
+        const icons: Record<string, React.ReactElement> = {
             linktree: (
                 <Image
                     src={LinktreeLogo}
@@ -27,13 +32,30 @@ export default async function Intro() {
             instagram: <Instagram className="w-6 h-6" />,
             linkedin: <Linkedin className="w-6 h-6" />,
             twitter: <Twitter className="w-6 h-6" />,
-            facebook: <Facebook className="w-6 h-6" />
+            facebook: <Facebook className="w-6 h-6" />,
         };
         return icons[platform] || null;
     };
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const target = e.target as HTMLElement;
+        if (target.closest("a")) return;
+
+        setState("fade-out");
+        setTimeout(() => {
+            onFinish();
+        }, 900);
+    };
+
     return (
-        <IntroClient>
+        <section
+            onClick={handleClick}
+            className={`fixed inset-0 z-[100] cursor-pointer transition-all duration-[800ms] ease-[cubic-bezier(0.83,0,0.17,1)] ${state === "visible" ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-[1.1] blur-md"
+                }`}
+            style={{
+                willChange: "opacity, transform, filter",
+            }}
+        >
             <div className="absolute inset-0 z-0">
                 {intro.backgroundMedia.type === "video" &&
                     intro.backgroundMedia.video?.url ? (
@@ -105,6 +127,6 @@ export default async function Intro() {
                     </>
                 )}
             </div>
-        </IntroClient>
+        </section>
     );
 }
