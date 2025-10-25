@@ -142,7 +142,7 @@ export default async function ProjectPage({ params }: Props) {
 
                 {(item.image?.caption || item.video?.caption) && (
                   <div className="absolute z-1 pointer-events-none inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-250 ease-out">
-                    <p className="text-sm p-8 pb-16">
+                    <p className="text-sm p-8 pb-8">
                       {item.image?.caption || item.video?.caption}
                     </p>
                   </div>
