@@ -9,7 +9,7 @@ import { HomeType, IntroType } from "@/types";
 import ProjectCard from "@/app/components/ProjectCard";
 import IntroWrapper from "@/app/components/IntroWrapper";
 import LinktreeLogo from "@/public/icons/linktree-logo.png";
-import { Instagram, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Instagram, Linkedin, Twitter, Facebook, ArrowDown } from "lucide-react";
 
 export default async function HomePage() {
   const [home, intro]: [HomeType, IntroType] = await Promise.all([
@@ -33,6 +33,10 @@ export default async function HomePage() {
           {home.heroTitle}
         </h1>
         <p className="text-lg md:text-2xl">{home.heroTagline}</p>
+        <div style={{ animation: "downPulse 3s ease-in-out infinite" }}>
+          <ArrowDown className="w-7 h-7 md:w-10 md:h-10" />
+        </div>
+
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2">

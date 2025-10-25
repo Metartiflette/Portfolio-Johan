@@ -9,6 +9,28 @@
   @apply font-black;
 }
 
+@keyframes downPulse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(15px);
+  }
+}
+
+.animate-downPulse {
+  animation: downPulse 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-downPulse {
+    animation: none !important;
+  }
+}
+
 /* Sanity Style */
 .prose {
   word-wrap: break-word;
