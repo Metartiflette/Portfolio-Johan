@@ -78,6 +78,8 @@ export type AboutType = {
     clients: {
       url: string;
       alt?: string | null;
+      clientName?: string;
+      link?: string;
     }[];
   };
   sections?: AboutAdditionalSectionType[];

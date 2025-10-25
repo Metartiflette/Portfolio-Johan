@@ -109,6 +109,7 @@ export async function getAbout() {
           "url": logo.asset->url,
           alt,
           clientName,
+          link
         },
       },
       sections[] {
