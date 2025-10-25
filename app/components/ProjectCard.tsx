@@ -27,6 +27,12 @@ function labelCategory(value?: string) {
   return CATEGORY_LABEL[value] ?? value;
 }
 
+function pickHomeMedia(p: ProjectType) {
+  const media = p.homeMediaOverride ? p.homeCoverMedia ?? p.coverMedia : p.coverMedia;
+  if (!media?.type) return p.coverMedia;
+  return media;
+}
+
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const isFullWidth = index === 0 || index % 3 === 1;
   const isSplitPair = index > 1 && (index % 3 === 2 || index % 3 === 0);
@@ -45,6 +51,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
   const categoryLabel = labelCategory(project.category);
 
+  const mediaForHome = pickHomeMedia(project);
+  const showVideo = mediaForHome?.type === "video" && !!mediaForHome.video?.url;
+  const showImage = mediaForHome?.type === "image" && !!mediaForHome.image?.url;
+
+  const imgAlt =
+    (mediaForHome?.type === "image" ? mediaForHome.image?.alt : undefined) ||
+    project.title;
+
   return (
     <Link
       key={project._id}
@@ -52,9 +66,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       className={`group relative block overflow-hidden ${wrapperClass}`}
     >
       <div className={`relative ${heightClass} overflow-hidden`}>
-        {project.coverMedia?.type === "video" && project.coverMedia.video?.url ? (
+        {showVideo ? (
           <video
-            src={project.coverMedia.video.url}
+            src={mediaForHome.video!.url}
             className="object-cover w-full h-full transition-transform duration-350 group-hover:scale-101"
             muted
             autoPlay
@@ -62,10 +76,10 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             playsInline
             preload="metadata"
           />
-        ) : project.coverMedia?.image?.url ? (
+        ) : showImage ? (
           <Image
-            src={project.coverMedia.image.url}
-            alt={project.coverMedia.image.alt || project.title}
+            src={mediaForHome.image!.url!}
+            alt={imgAlt}
             fill
             className="object-cover transition-transform duration-350 group-hover:scale-101"
             loading="lazy"

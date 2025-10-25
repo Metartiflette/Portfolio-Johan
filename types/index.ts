@@ -29,8 +29,14 @@ export type ProjectType = {
   slug: string;
   category?: string;
   tagline?: string;
+  homeMediaOverride?: boolean;
   coverMedia: {
     type: "image" | "video";
+    image?: { alt?: string | null; url?: string };
+    video?: { url?: string };
+  };
+  homeCoverMedia?: {
+    type?: "image" | "video";
     image?: { alt?: string | null; url?: string };
     video?: { url?: string };
   };

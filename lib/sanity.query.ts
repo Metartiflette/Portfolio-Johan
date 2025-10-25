@@ -1,3 +1,5 @@
+// lib/sanity.query.ts
+
 import { groq } from "next-sanity";
 import client from "./sanity.client";
 
@@ -20,15 +22,16 @@ export async function getHome() {
         "slug": slug.current,
         category,
         tagline,
+        homeMediaOverride,
         coverMedia {
           type,
-          image {
-            alt,
-            "url": asset->url
-          },
-          video {
-            "url": asset->url
-          }
+          image { alt, "url": asset->url },
+          video { "url": asset->url }
+        },
+        homeCoverMedia {
+          type,
+          image { alt, "url": asset->url },
+          video { "url": asset->url }
         }
       },
       socialLinks[] {
@@ -51,15 +54,16 @@ export async function getProjects() {
       "slug": slug.current,
       category,
       tagline,
+      homeMediaOverride,
       coverMedia {
         type,
-        image {
-          alt,
-          "url": asset->url
-        },
-        video {
-          "url": asset->url
-        }
+        image { alt, "url": asset->url },
+        video { "url": asset->url }
+      },
+      homeCoverMedia {
+        type,
+        image { alt, "url": asset->url },
+        video { "url": asset->url }
       }
     }`
   );
