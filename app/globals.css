@@ -22,7 +22,7 @@
 }
 
 .animate-downPulse {
-  animation: downPulse 1s ease-in-out infinite;
+  animation: downPulse 2s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

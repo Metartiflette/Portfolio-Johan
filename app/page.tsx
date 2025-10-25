@@ -1,5 +1,4 @@
 // app/page.tsx
-
 import { ReactElement, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +8,13 @@ import { HomeType, IntroType } from "@/types";
 import ProjectCard from "@/app/components/ProjectCard";
 import IntroWrapper from "@/app/components/IntroWrapper";
 import LinktreeLogo from "@/public/icons/linktree-logo.png";
-import { Instagram, Linkedin, Twitter, Facebook, ArrowDown } from "lucide-react";
+import {
+  Instagram,
+  Linkedin,
+  Twitter,
+  Facebook,
+  ArrowDown,
+} from "lucide-react";
 
 export default async function HomePage() {
   const [home, intro]: [HomeType, IntroType] = await Promise.all([
@@ -33,10 +38,9 @@ export default async function HomePage() {
           {home.heroTitle}
         </h1>
         <p className="text-lg md:text-2xl">{home.heroTagline}</p>
-        <div style={{ animation: "downPulse 3s ease-in-out infinite" }}>
+        <div className="mt-5 animate-downPulse" aria-hidden="true">
           <ArrowDown className="w-7 h-7 md:w-10 md:h-10" />
         </div>
-
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2">
@@ -66,7 +70,10 @@ export default async function HomePage() {
                   rel="noopener noreferrer"
                   className="hover:opacity-80 transition-opacity"
                 >
-                  <IconRenderer platform={link.platform} />
+                  <IconRenderer
+                    platform={link.platform}
+                    customIcon={link.customIcon}
+                  />
                 </Link>
               ))}
           </div>
@@ -76,21 +83,55 @@ export default async function HomePage() {
   );
 }
 
-function IconRenderer({ platform }: { platform: string }) {
-  const icons: Record<string, ReactElement> = {
-    linktree: (
+function IconRenderer({
+  platform,
+  customIcon,
+}: {
+  platform: string;
+  customIcon?: { url: string; alt?: string | null };
+}) {
+  if (platform === "other" && customIcon?.url) {
+    return (
       <Image
-        src={LinktreeLogo}
-        alt="Linktree"
+        src={customIcon.url}
+        alt={customIcon.alt || "Custom icon"}
         width={44}
         height={44}
         className="object-contain w-5 h-5 md:w-11 md:h-11"
       />
-    ),
-    instagram: <Instagram className="w-5 h-5 md:w-11 md:h-11" />,
-    linkedin: <Linkedin className="w-5 h-5 md:w-11 md:h-11" />,
-    twitter: <Twitter className="w-5 h-5 md:w-11 md:h-11" />,
-    facebook: <Facebook className="w-5 h-5 md:w-11 md:h-11" />,
-  };
-  return icons[platform] || null;
+    );
+  }
+  switch (platform) {
+    case "instagram":
+      return <Instagram className="w-5 h-5 md:w-11 md:h-11" />;
+    case "linkedin":
+      return <Linkedin className="w-5 h-5 md:w-11 md:h-11" />;
+    case "twitter":
+      return <Twitter className="w-5 h-5 md:w-11 md:h-11" />;
+    case "facebook":
+      return <Facebook className="w-5 h-5 md:w-11 md:h-11" />;
+    case "linktree":
+      return (
+        <Image
+          src={LinktreeLogo}
+          alt="Linktree"
+          width={44}
+          height={44}
+          className="object-contain w-5 h-5 md:w-11 md:h-11"
+        />
+      );
+    default:
+      if (customIcon?.url) {
+        return (
+          <Image
+            src={customIcon.url}
+            alt={customIcon.alt || "Custom icon"}
+            width={44}
+            height={44}
+            className="object-contain w-5 h-5 md:w-11 md:h-11"
+          />
+        );
+      }
+      return null;
+  }
 }
