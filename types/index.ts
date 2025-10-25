@@ -31,26 +31,10 @@ export type ProjectType = {
   tagline?: string;
   coverMedia: {
     type: "image" | "video";
-    image?: {
-      alt?: string | null;
-      url?: string;
-    };
-    video?: {
-      url?: string;
-    };
+    image?: { alt?: string | null; url?: string };
+    video?: { url?: string };
   };
   description?: PortableTextBlock[];
-  credits?: {
-    role: string;
-    name: string;
-  }[];
-  tools?: {
-    name: string;
-    icon?: {
-      image: string;
-      alt?: string | null;
-    };
-  }[];
   gallery?: {
     type: "image" | "video";
     image?: {
@@ -60,7 +44,6 @@ export type ProjectType = {
     };
     video?: {
       url?: string;
-      caption?: string;
     };
   }[];
 };

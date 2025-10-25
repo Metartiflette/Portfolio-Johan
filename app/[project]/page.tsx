@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: Props) {
                 {item.type === "video" && item.video?.url ? (
                   <VideoWithHoverControls
                     src={item.video.url}
-                    className="object-cover w-full h-full transition-transform duration-350 group-hover:scale-101"
+                    className="object-cover w-full h-full"
                   />
                 ) : item.image?.url ? (
                   <Image
@@ -140,10 +140,10 @@ export default async function ProjectPage({ params }: Props) {
                   />
                 ) : null}
 
-                {(item.image?.caption || item.video?.caption) && (
+                {(item.image?.caption) && (
                   <div className="absolute z-1 pointer-events-none inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-250 ease-out">
-                    <p className="text-sm p-8 pb-8">
-                      {item.image?.caption || item.video?.caption}
+                    <p className="text-sm p-6 pb-6">
+                      {item.image?.caption}
                     </p>
                   </div>
                 )}

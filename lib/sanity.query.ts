@@ -76,25 +76,13 @@ export async function getSingleProject(slug: string) {
       description,
       coverMedia {
         type,
-        image {
-          alt,
-          "url": asset->url
-        },
-        video {
-          "url": asset->url
-        }
+        image { alt, "url": asset->url },
+        video { "url": asset->url }
       },
       gallery[] {
         type,
-        image {
-          "url": asset->url,
-          alt,
-          caption
-        },
-        video {
-          "url": asset->url,
-          caption
-        }
+        image { "url": asset->url, alt, caption },
+        video { "url": asset->url }
       }
     }`,
     { slug }
