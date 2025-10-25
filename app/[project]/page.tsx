@@ -18,6 +18,22 @@ interface SanityBlock {
   children?: Array<{ text?: string }>;
 }
 
+const CATEGORY_LABEL: Record<string, string> = {
+  photography: "Photography",
+  "short-movie": "Short Movie",
+  "client-project": "Client project",
+  collaboration: "Collaboration",
+  "art-project": "Art project",
+  drone: "Drone",
+  editing: "Editing",
+  miscellaneaous: "Miscellaneaous",
+};
+
+function labelCategory(value?: string) {
+  if (!value) return "";
+  return CATEGORY_LABEL[value] ?? value;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const slug = resolvedParams.project;
@@ -51,6 +67,8 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!project) notFound();
 
+  const categoryLabel = labelCategory(project.category);
+
   return (
     <main className="relative min-h-screen px-6 md:px-12">
       <Link
@@ -80,7 +98,9 @@ export default async function ProjectPage({ params }: Props) {
 
       <div className="text-center md:text-left mt-4 mb-6 md:mt-8 md:mb-12">
         <h1 className="text-2xl md:text-5xl font-black uppercase">{project.title}</h1>
-        {project.category && <p className="text-[16px] md:text-2xl font-bold">{project.category}</p>}
+        {categoryLabel && (
+          <p className="text-[16px] md:text-2xl font-bold">{categoryLabel}</p>
+        )}
       </div>
 
       {project.description && (
@@ -99,7 +119,7 @@ export default async function ProjectPage({ params }: Props) {
         <section className="text-center md:text-left">
           <h2 className="text-[16px] md:text-2xl font-bold mb-3 md:mb-6">Visual vignettes</h2>
 
-            <div className="space-y-6 md:space-y-12">
+          <div className="space-y-6 md:space-y-12">
             {project.gallery.map((item, index) => (
               <div
                 key={index}

@@ -34,7 +34,7 @@ export default function Footer() {
               Privacy Notice
             </Link>
             <Link
-              href="https://fr.linkedin.com/in/johan-vuillerme"
+              href="mailto:lla.vuillerme.johan@gmail.com"
               className="hover:opacity-80 transition-opacity text-center"
             >
               Contact Me

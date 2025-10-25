@@ -29,7 +29,7 @@ export default function Navbar() {
         },
         {
             title: "CONTACT ME",
-            href: "https://fr.linkedin.com/in/johan-vuillerme",
+            href: "mailto:lla.vuillerme.johan@gmail.com",
             external: true,
         },
     ];

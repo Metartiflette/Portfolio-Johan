@@ -11,6 +11,22 @@ type ProjectCardProps = {
   index: number;
 };
 
+const CATEGORY_LABEL: Record<string, string> = {
+  photography: "Photography",
+  "short-movie": "Short Movie",
+  "client-project": "Client project",
+  collaboration: "Collaboration",
+  "art-project": "Art project",
+  drone: "Drone",
+  editing: "Editing",
+  miscellaneaous: "Miscellaneaous",
+};
+
+function labelCategory(value?: string) {
+  if (!value) return "";
+  return CATEGORY_LABEL[value] ?? value;
+}
+
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const isFullWidth = index === 0 || index % 3 === 1;
   const isSplitPair = index > 1 && (index % 3 === 2 || index % 3 === 0);
@@ -26,6 +42,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
     if (isSplitPair) return "col-span-2 md:col-span-1";
     return "col-span-2";
   })();
+
+  const categoryLabel = labelCategory(project.category);
 
   return (
     <Link
@@ -57,9 +75,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
       <div className="absolute bottom-0 left-0 p-8 z-10">
         <h2 className="text-2xl md:text-4xl font-black uppercase">{project.title}</h2>
-        {project.category && (
-          <p className="text-[16px] md:text-[28px] font-bold">{project.category}</p>
+
+        {categoryLabel && (
+          <p className="text-[16px] md:text-[28px] font-bold">{categoryLabel}</p>
         )}
+
         {project.tagline && (
           <p className="text-[12px] md:text-2xl">{project.tagline}</p>
         )}
