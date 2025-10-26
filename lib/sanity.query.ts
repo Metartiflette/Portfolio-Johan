@@ -129,28 +129,22 @@ export async function getIntro() {
     groq`*[_type == "intro"][0]{
       _id,
       title,
-      logo {
-        "url": asset->url,
-        alt
+      logoMedia{
+        type,
+        image{ alt, "url": asset->url },
+        video{ "url": asset->url }
       },
       description,
-      backgroundMedia {
+      backgroundMedia{
         type,
-        image {
-          alt,
-          "url": asset->url
-        },
-        video {
-          "url": asset->url
-        }
+        image{ alt, "url": asset->url },
+        video{ "url": asset->url }
       },
-      socialLinks[] {
+      transition{ "url": asset->url },
+      socialLinks[]{
         platform,
         url,
-        customIcon {
-          "url": asset->url,
-          alt
-        }
+        customIcon{ "url": asset->url, alt }
       }
     }`
   );

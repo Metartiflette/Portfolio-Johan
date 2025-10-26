@@ -88,20 +88,17 @@ export type AboutType = {
 export type IntroType = {
   _id: string;
   title: string;
-  logo: {
-    url: string;
-    alt?: string | null;
+  logoMedia: {
+    type: "image" | "video";
+    image?: { url?: string; alt?: string | null };
+    video?: { url?: string };
   };
   description: PortableTextBlock[];
   backgroundMedia: {
     type: "image" | "video";
-    image?: {
-      alt?: string | null;
-      url?: string;
-    };
-    video?: {
-      url?: string;
-    };
+    image?: { alt?: string | null; url?: string };
+    video?: { url?: string };
   };
+  transition?: { url?: string };
   socialLinks?: SocialLinkType[];
 };
