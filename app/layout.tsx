@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Johan Vuillerme - Portfolio",
   description:
-    "Portfolio de Johan Vuillerme, réalisateur et monteur vidéo freelance. Courts-métrages, projets clients, collaborations, drone, etc... Basé à Chambéry (France), disponible partout !",
+    "Portfolio of Johan Vuillerme, freelance video director and editor. Short films, client projects, collaborations, drone footage, etc. Based in Chambéry (France), available anywhere!",
   icons: {
     icon: "/favicon.ico",
   },
