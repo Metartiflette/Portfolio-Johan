@@ -1,5 +1,5 @@
 // app/page.tsx
-import { ReactElement, Suspense } from "react";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";

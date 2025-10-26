@@ -3,7 +3,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 interface SlideData {
   src: string;
@@ -22,9 +22,12 @@ export function Carousel({
   autoPlayInterval = 10000,
 }: CarouselProps) {
   const [current, setCurrent] = useState(0);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
+  const nextSlide = useCallback(
+    () => setCurrent((prev) => (prev + 1) % slides.length),
+    [slides.length]
+  );
 
   useEffect(() => {
     if (autoPlay) {
@@ -33,7 +36,7 @@ export function Carousel({
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [current, autoPlay, autoPlayInterval]);
+  }, [current, autoPlay, autoPlayInterval, nextSlide]);
 
   return (
     <div className="relative w-full md:flex-[1_1_75%] md:max-w-[550px] overflow-hidden rounded-xl group">
@@ -62,10 +65,9 @@ export function Carousel({
             key={index}
             onClick={() => setCurrent(index)}
             aria-label={`Aller au slide ${index + 1}`}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${current === index
-                ? "bg-white scale-110"
-                : "bg-gray-500/50 hover:bg-gray-300"
-              }`}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              current === index ? "bg-white scale-110" : "bg-gray-500/50 hover:bg-gray-300"
+            }`}
           />
         ))}
       </div>
