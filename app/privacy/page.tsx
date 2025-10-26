@@ -49,7 +49,7 @@ export default function Privacy() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">5. Contact</h2>
           <p>
-            Pour toute question concernant vos données, contactez-moi via le formulaire de contact du site.
+            Pour toute question concernant vos données, contactez-moi via l'email test@gmail.com.
           </p>
         </section>
 
