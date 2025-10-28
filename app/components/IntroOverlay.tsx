@@ -60,7 +60,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
                 await v.play();
             } catch {
                 setPhase("post");
-                window.setTimeout(onFinish, 900);
+                window.setTimeout(onFinish, 400);
             }
         };
         play();
