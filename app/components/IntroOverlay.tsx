@@ -68,7 +68,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
 
     const onTransitionEnded = () => {
         setPhase("post");
-        window.setTimeout(onFinish, 900);
+        window.setTimeout(onFinish, 400);
     };
 
     return (
