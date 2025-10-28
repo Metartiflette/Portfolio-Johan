@@ -163,7 +163,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
 
             {hasTransition && (
                 <div
-                    className={`fixed inset-0 z-[200] pointer-events-none transition-all duration-[200ms] ease-[cubic-bezier(0.83,0,0.17,1)]
+                    className={`fixed inset-0 z-[200] pointer-events-none transition-all duration-[800ms] ease-[cubic-bezier(0.83,0,0.17,1)]
             ${phase === "intro" ? "opacity-0" : "opacity-100"}
             ${phase === "post" ? "opacity-0 scale-[1.1] blur-md" : "scale-100 blur-0"}`}
                     style={{ willChange: "opacity, transform, filter", backgroundColor: "black" }}
