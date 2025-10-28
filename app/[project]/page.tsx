@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project: ProjectType = await getSingleProject(slug);
 
   if (!project) {
-    return { title: "Projet non trouvé", description: "Ce projet n'existe pas ou a été supprimé." };
+    return { title: "Projet not found", description: "This project does not exist or has been deleted." };
   }
 
   const description =
