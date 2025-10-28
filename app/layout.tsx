@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Johan Vuillerme - Portfolio",
   description:
-    "Portfolio of Johan Vuillerme, freelance video director and editor. Short films, client projects, collaborations, drone footage, etc. Based in Chambéry (France), available anywhere!",
+    "Portfolio of Johan Vuillerme, freelance video director and editor. Short films, client projects, collaborations, drone footage, etc. Based in Chambéry (France), available anytime!",
   icons: {
     icon: "/favicon.ico",
   },
