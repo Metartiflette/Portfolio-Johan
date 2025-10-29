@@ -15,7 +15,7 @@ type IntroOverlayProps = {
 };
 
 export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
-  const [phase, setPhase] = useState<"intro" | "transition">("intro");
+  const [phase, setPhase] = useState<"intro" | "transition" | "fade-out">("intro");
   const transitionRef = useRef<HTMLVideoElement | null>(null);
 
   const hasTransition = Boolean(intro.transition?.url);
@@ -46,20 +46,22 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
     if (hasTransition) {
       setPhase("transition");
 
-      // ⏱ Changement de page après 1200ms (milieu de la vidéo)
       setTimeout(() => onFinish(), 1200);
 
-      // ⏱ Suppression totale du composant après 2000ms (fin de la vidéo)
-      setTimeout(() => setPhase("intro"), 2000);
+      setTimeout(() => setPhase("fade-out"), 1600);
     } else {
-      onFinish();
+      setPhase("fade-out");
+      setTimeout(onFinish, 800);
     }
   };
 
   useEffect(() => {
     if (phase === "transition" && transitionRef.current) {
       transitionRef.current.currentTime = 0;
-      transitionRef.current.play().catch(() => onFinish());
+      transitionRef.current.play().catch(() => {
+        setPhase("fade-out");
+        setTimeout(onFinish, 800);
+      });
     }
   }, [phase, onFinish]);
 
@@ -67,7 +69,9 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
     <>
       <section
         onClick={handleClick}
-        className="fixed inset-0 z-[100] cursor-pointer opacity-100"
+        className={`fixed inset-0 z-[100] cursor-pointer transition-all duration-[900ms] ease-[cubic-bezier(0.83,0,0.17,1)]
+          ${phase === "fade-out" ? "opacity-0 scale-[1.05] blur-md" : "opacity-100 scale-100 blur-0"}`}
+        style={{ willChange: "opacity, transform, filter" }}
       >
         <div className="absolute inset-0 z-0">
           {intro.backgroundMedia.type === "video" && intro.backgroundMedia.video?.url ? (
@@ -89,7 +93,6 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
             />
           ) : null}
         </div>
-
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
           {intro.logoMedia.type === "video" && intro.logoMedia.video?.url ? (
             <video
@@ -151,17 +154,24 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
         </div>
       </section>
 
-      {hasTransition && phase === "transition" && (
-        <div className="fixed inset-0 z-[200] pointer-events-none opacity-100">
-          <video
-            ref={transitionRef}
-            src={intro.transition?.url}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover"
-          />
+      {/* --- TRANSITION VIDEO --- */}
+      {hasTransition && (
+        <div
+          className={`fixed inset-0 z-[200] pointer-events-none transition-opacity duration-[700ms] ease-in-out
+            ${phase === "transition" ? "opacity-100" : "opacity-0"}`}
+          style={{ willChange: "opacity" }}
+        >
+          {phase !== "intro" && (
+            <video
+              ref={transitionRef}
+              src={intro.transition?.url}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover"
+            />
+          )}
         </div>
       )}
     </>
