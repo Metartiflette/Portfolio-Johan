@@ -47,7 +47,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
       setPhase("transition");
 
       // ⏱ Changement de page après 1200ms (milieu de la vidéo)
-      setTimeout(() => onFinish(), 2000);
+      setTimeout(() => onFinish(), 1200);
 
       // ⏱ Suppression totale du composant après 2000ms (fin de la vidéo)
       setTimeout(() => setPhase("intro"), 2000);
