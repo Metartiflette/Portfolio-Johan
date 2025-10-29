@@ -61,5 +61,3 @@ export default function IntroWrapper({ intro }: { intro: IntroType }) {
         </>
     );
 }
-
-``` 
