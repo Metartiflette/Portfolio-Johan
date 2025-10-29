@@ -75,7 +75,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
         <>
             <section
                 onClick={handleClick}
-                className={`fixed inset-0 z-[100] cursor-pointer transition-all duration-[800ms] ease-[cubic-bezier(0.83,0,0.17,1)]
+                className={`fixed inset-0 z-[100] cursor-pointer transition-all duration-[2000ms] ease-[cubic-bezier(0.83,0,0.17,1)]
           ${phase === "post" ? "opacity-0 scale-[1.1] blur-md" : "opacity-100 scale-100 blur-0"}`}
                 style={{ willChange: "opacity, transform, filter" }}
             >
