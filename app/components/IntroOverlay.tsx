@@ -46,9 +46,9 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
     if (hasTransition) {
       setPhase("transition");
 
-      setTimeout(() => onFinish(), 1200);
+      setTimeout(() => onFinish(), 2000);
 
-      setTimeout(() => setPhase("fade-out"), 1600);
+      setTimeout(() => setPhase("fade-out"), 1200);
     } else {
       setPhase("fade-out");
       setTimeout(onFinish, 800);
