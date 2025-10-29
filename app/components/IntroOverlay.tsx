@@ -48,7 +48,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
             setPhase("transition");
         } else {
             setPhase("post");
-            window.setTimeout(onFinish, 800);
+            window.setTimeout(onFinish, 1000);
         }
     };
 
@@ -60,7 +60,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
                 await v.play();
             } catch {
                 setPhase("post");
-                window.setTimeout(onFinish, 800);
+                window.setTimeout(onFinish, 1000);
             }
         };
         play();
@@ -68,7 +68,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
 
     const onTransitionEnded = () => {
         setPhase("post");
-        window.setTimeout(onFinish, 800);
+        window.setTimeout(onFinish, 1000);
     };
 
     return (
