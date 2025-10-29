@@ -21,7 +21,7 @@ export default function IntroWrapper({ intro }: { intro: IntroType }) {
     const setCookie = () => {
         const expiration = new Date();
         expiration.setHours(expiration.getHours() + 2);
-        document.cookie = introSeen=true; path=/; expires=${expiration.toUTCString()}; SameSite=Lax`;
+        document.cookie = `introSeen=true; path=/; expires=${expiration.toUTCString()}; SameSite=Lax`;
     };
 
     const start = () => {
