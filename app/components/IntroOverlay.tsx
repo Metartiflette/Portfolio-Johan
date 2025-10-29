@@ -48,7 +48,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
             setPhase("transition");
         } else {
             setPhase("post");
-            window.setTimeout(onFinish, 900);
+            window.setTimeout(onFinish, 100);
         }
     };
 
