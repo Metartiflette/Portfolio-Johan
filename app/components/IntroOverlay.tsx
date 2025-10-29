@@ -45,8 +45,10 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
 
     if (hasTransition) {
       setPhase("transition");
-      setTimeout(() => setPhase("fade-out"), 1200);
-      setTimeout(onFinish, 1200);
+
+      setTimeout(() => onFinish(), 1200);
+
+      setTimeout(() => setPhase("fade-out"), 1600);
     } else {
       setPhase("fade-out");
       setTimeout(onFinish, 800);
@@ -55,6 +57,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
 
   useEffect(() => {
     if (phase === "transition" && transitionRef.current) {
+      transitionRef.current.currentTime = 0;
       transitionRef.current.play().catch(() => {
         setPhase("fade-out");
         setTimeout(onFinish, 800);
@@ -90,7 +93,6 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
             />
           ) : null}
         </div>
-
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
           {intro.logoMedia.type === "video" && intro.logoMedia.video?.url ? (
             <video
@@ -154,7 +156,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
 
       {hasTransition && (
         <div
-          className={`fixed inset-0 z-[200] pointer-events-none transition-opacity duration-[500ms] ease-in-out
+          className={`fixed inset-0 z-[200] pointer-events-none transition-opacity duration-[700ms] ease-in-out
             ${phase === "transition" ? "opacity-100" : "opacity-0"}`}
           style={{ willChange: "opacity" }}
         >
