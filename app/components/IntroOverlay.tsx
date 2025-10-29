@@ -122,7 +122,7 @@ export default function IntroOverlay({ intro, onFinish }: IntroOverlayProps) {
                     ) : null}
                 </div>
 
-                <div className="absolute bottom-70 right-0 md:bottom-30 md:right-10 z-10 prose prose-invert prose-lg text-white text-center text-2xl md:text-5xl font-thin md:text-right flex md:block items-center justify-center w-full md:w-auto md:h-auto custom-strong">
+                <div className="absolute bottom-60 right-0 md:bottom-30 md:right-10 z-10 prose prose-invert prose-lg text-white text-center text-2xl md:text-5xl font-thin md:text-right flex md:block items-center justify-center w-full md:w-auto md:h-auto custom-strong">
                     <PortableText value={intro.description} />
                 </div>
 
